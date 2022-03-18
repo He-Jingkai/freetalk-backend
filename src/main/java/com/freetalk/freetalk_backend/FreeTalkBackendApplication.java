@@ -7,16 +7,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 
-
 @SpringBootApplication
 @EnableScheduling
 public class FreeTalkBackendApplication {
 
 
-    public static void main(String[] args) {
-        SpringApplication.run(FreeTalkBackendApplication.class, args
-        );
-    }
+    public static void main(String[] args) {SpringApplication.run(FreeTalkBackendApplication.class, args);}
 
     @Bean
     MeterRegistryCustomizer meterRegistryCustomizer(MeterRegistry meterRegistry) {
