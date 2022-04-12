@@ -44,13 +44,55 @@ class MessageServiceImplTest {
 
     @Test
     void postAMessage() {
-        Map<String,Object> map=new HashMap<>();
-        map.put("sendUserId", 3);
-        map.put("receiveUserId",2);
-        map.put("messageContent","Hello world");
-        messageService.postAMessage(map);
-        List<Message> messages=messageService.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(3,2,0);
-        assertThat(messages.size(),equalTo(1));
+        Map<String,Object> map1=new HashMap<>();
+        map1.put("sendUserId", 0);
+        map1.put("receiveUserId",7);
+        map1.put("messageContent","test");
+        messageService.postAMessage(map1);
+        List<Message> messages1=messageService.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(0,7,0);
+        assertThat(messages1.size(),equalTo(0));
+        Map<String,Object> map2=new HashMap<>();
+        map2.put("sendUserId", 1);
+        map2.put("receiveUserId",6);
+        map2.put("messageContent","test");
+        messageService.postAMessage(map2);
+        List<Message> messages2=messageService.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(1,6,0);
+        assertThat(messages2.size(),equalTo(1));
+        Map<String,Object> map3=new HashMap<>();
+        map3.put("sendUserId", 2);
+        map3.put("receiveUserId",5);
+        map3.put("messageContent","test");
+        messageService.postAMessage(map3);
+        List<Message> messages3=messageService.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(2,5,0);
+        assertThat(messages3.size(),equalTo(1));
+        Map<String,Object> map4=new HashMap<>();
+        map4.put("sendUserId", 3);
+        map4.put("receiveUserId",4);
+        map4.put("messageContent","Hello world");
+        messageService.postAMessage(map4);
+        List<Message> messages4=messageService.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(3,4,0);
+        assertThat(messages4.size(),equalTo(1));
+        Map<String,Object> map5=new HashMap<>();
+        map5.put("sendUserId", 4);
+        map5.put("receiveUserId",3);
+        map5.put("messageContent","Hello world");
+        messageService.postAMessage(map5);
+        List<Message> messages5=messageService.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(4,3,0);
+        assertThat(messages5.size(),equalTo(1));
+        Map<String,Object> map6=new HashMap<>();
+        map6.put("sendUserId", 5);
+        map6.put("receiveUserId",2);
+        map6.put("messageContent","Hello world");
+        messageService.postAMessage(map6);
+        List<Message> messages6=messageService.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(5,4,0);
+        assertThat(messages6.size(),equalTo(1));
+        Map<String,Object> map7=new HashMap<>();
+        map7.put("sendUserId", 6);
+        map7.put("receiveUserId",1);
+        map7.put("messageContent","Hello world");
+        messageService.postAMessage(map7);
+        List<Message> messages7=messageService.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(6,1,0);
+        assertThat(messages7.size(),equalTo(1));
     }
 
     @Test
