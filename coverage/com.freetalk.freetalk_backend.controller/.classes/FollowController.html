@@ -1,0 +1,242 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FollowController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.controller</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FollowController (com.freetalk.freetalk_backend.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FollowController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (35/ 35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.controller;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.freetalk.freetalk_backend.dto.*;
+<i>4</i>&nbsp;import com.freetalk.freetalk_backend.entity.Comment;
+<i>5</i>&nbsp;import com.freetalk.freetalk_backend.entity.Topic;
+<i>6</i>&nbsp;import com.freetalk.freetalk_backend.entity.User;
+<i>7</i>&nbsp;import com.freetalk.freetalk_backend.entity.UserInfo;
+<i>8</i>&nbsp;import com.freetalk.freetalk_backend.service.FollowService;
+<i>9</i>&nbsp;import com.freetalk.freetalk_backend.service.UserService;
+<i>10</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>11</i>&nbsp;import org.springframework.web.bind.annotation.CrossOrigin;
+<i>12</i>&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+<i>13</i>&nbsp;import org.springframework.web.bind.annotation.RequestParam;
+<i>14</i>&nbsp;import org.springframework.web.bind.annotation.RestController;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;import java.util.ArrayList;
+<i>17</i>&nbsp;import java.util.List;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;@RestController
+<b class="fc"><i>20</i>&nbsp;public class FollowController {</b>
+<i>21</i>&nbsp;    @Autowired
+<i>22</i>&nbsp;    private FollowService followService;
+<i>23</i>&nbsp;    @Autowired
+<i>24</i>&nbsp;    private UserService userService;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    /**
+<i>28</i>&nbsp;     * @Description: 关注一个用户
+<i>29</i>&nbsp;     */
+<i>30</i>&nbsp;    @CrossOrigin
+<i>31</i>&nbsp;    @RequestMapping(&quot;/Security/followAUser&quot;)
+<i>32</i>&nbsp;    void followAUser(@RequestParam(&quot;userId&quot;) Integer userId,
+<i>33</i>&nbsp;                     @RequestParam(&quot;userId_toFollow&quot;) Integer userId_toFollow){
+<b class="fc"><i>34</i>&nbsp;        followService.followAUser(userId, userId_toFollow);</b>
+<b class="fc"><i>35</i>&nbsp;    }</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * @Description: 取关一个用户
+<i>39</i>&nbsp;     */
+<i>40</i>&nbsp;    @CrossOrigin
+<i>41</i>&nbsp;    @RequestMapping(&quot;/Security/unfollowAUser&quot;)
+<i>42</i>&nbsp;    void unfollowAUser(@RequestParam(&quot;userId&quot;) Integer userId,
+<i>43</i>&nbsp;                       @RequestParam(&quot;userId_toFollow&quot;) Integer userId_toFollow){
+<b class="fc"><i>44</i>&nbsp;        followService.unfollowAUser(userId, userId_toFollow);</b>
+<b class="fc"><i>45</i>&nbsp;    }</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    /**
+<i>49</i>&nbsp;     * @Description: 获取回复我所有话题和评论的所有评论（按照时间排序）
+<i>50</i>&nbsp;     */
+<i>51</i>&nbsp;    @CrossOrigin
+<i>52</i>&nbsp;    @RequestMapping(&quot;/getUserAnswerMyCommentAndTopic&quot;)
+<i>53</i>&nbsp;    List&lt;CommentUserBind&gt; getUserAnswerMyCommentAndTopic(@RequestParam(&quot;userId&quot;) Integer userId){
+<b class="fc"><i>54</i>&nbsp;        return followService.getUserAnswerMyCommentAndTopic(userId);</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    /**
+<i>58</i>&nbsp;     * @Description: 获取喜欢一个评论的所有用户
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    @CrossOrigin
+<i>61</i>&nbsp;    @RequestMapping(&quot;/getUserLikeAComment&quot;)
+<i>62</i>&nbsp;    List&lt;UserInfo&gt; getUserLikeAComment(@RequestParam(&quot;commentId&quot;) Integer commentId){
+<b class="fc"><i>63</i>&nbsp;        return followService.getUserLikeAComment(commentId);</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    /**
+<i>67</i>&nbsp;     * @Description: 获取关注一个话题的所有用户
+<i>68</i>&nbsp;     */
+<i>69</i>&nbsp;    @CrossOrigin
+<i>70</i>&nbsp;    @RequestMapping(&quot;/getUserStarAComment&quot;)
+<i>71</i>&nbsp;    List&lt;UserInfo&gt; getUserStarAComment(@RequestParam(&quot;commentId&quot;) Integer commentId){
+<b class="fc"><i>72</i>&nbsp;        return followService.getUserStarAComment(commentId);</b>
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    /**
+<i>76</i>&nbsp;     * @Description: 获取用户喜欢的话题
+<i>77</i>&nbsp;     */
+<i>78</i>&nbsp;    @CrossOrigin
+<i>79</i>&nbsp;    @RequestMapping(&quot;/getUserLikeATopic&quot;)
+<i>80</i>&nbsp;    List&lt;UserInfo&gt; getUserLikeATopic(@RequestParam(&quot;topicId&quot;) Integer topicId){
+<b class="fc"><i>81</i>&nbsp;        return followService.getUserLikeATopic(topicId);</b>
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    /**
+<i>85</i>&nbsp;     * @Description: 获取用户喜欢的话题
+<i>86</i>&nbsp;     */
+<i>87</i>&nbsp;    @CrossOrigin
+<i>88</i>&nbsp;    @RequestMapping(&quot;/getTopicsUserLike&quot;)
+<i>89</i>&nbsp;    List&lt;Topic&gt; getTopicsUserLike(@RequestParam(&quot;userId&quot;) Integer userId){
+<b class="fc"><i>90</i>&nbsp;        return userService.findUserByUserId(userId).getTopicsLike();</b>
+<i>91</i>&nbsp;    }
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;    /**
+<i>94</i>&nbsp;     * @Description: 获取用户关注的话题
+<i>95</i>&nbsp;     */
+<i>96</i>&nbsp;    @CrossOrigin
+<i>97</i>&nbsp;    @RequestMapping(&quot;/getTopicsUserStar&quot;)
+<i>98</i>&nbsp;    List&lt;TopicView&gt; getTopicsUserStar(@RequestParam(&quot;userId&quot;) Integer userId){
+<b class="fc"><i>99</i>&nbsp;        List&lt;Topic&gt; topics=userService.findUserByUserId(userId).getTopicsStar();</b>
+<b class="fc"><i>100</i>&nbsp;        List&lt;TopicView&gt; topicViews= new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>101</i>&nbsp;        for (Topic topic:topics)</b>
+<b class="fc"><i>102</i>&nbsp;            topicViews.add(new TopicView(topic));</b>
+<b class="fc"><i>103</i>&nbsp;        return topicViews;</b>
+<i>104</i>&nbsp;    }
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    /**
+<i>107</i>&nbsp;     * @Description: 获取用户喜欢的回答
+<i>108</i>&nbsp;     */
+<i>109</i>&nbsp;    @CrossOrigin
+<i>110</i>&nbsp;    @RequestMapping(&quot;/getCommentsUserLike&quot;)
+<i>111</i>&nbsp;    List&lt;TopicBindCommentView&gt; getCommentsUserLike(@RequestParam(&quot;userId&quot;) Integer userId){
+<b class="fc"><i>112</i>&nbsp;        List&lt;Comment&gt; comments=userService.findUserByUserId(userId).getCommentsLike();</b>
+<b class="fc"><i>113</i>&nbsp;        List&lt;TopicBindCommentView&gt; topicBindCommentViews=new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>114</i>&nbsp;        for (Comment comment:comments)</b>
+<b class="fc"><i>115</i>&nbsp;            topicBindCommentViews.add(new TopicBindCommentView(comment));</b>
+<b class="fc"><i>116</i>&nbsp;        return topicBindCommentViews;</b>
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    /**
+<i>120</i>&nbsp;     * @Description: 获取用户收藏的回答
+<i>121</i>&nbsp;     */
+<i>122</i>&nbsp;    @CrossOrigin
+<i>123</i>&nbsp;    @RequestMapping(&quot;/getCommentsUserStar&quot;)
+<i>124</i>&nbsp;    List&lt;TopicBindCommentView&gt; getCommentsUserStar(@RequestParam(&quot;userId&quot;) Integer userId){
+<b class="fc"><i>125</i>&nbsp;        List&lt;Comment&gt; comments=userService.findUserByUserId(userId).getCommentsStar();</b>
+<b class="fc"><i>126</i>&nbsp;        List&lt;TopicBindCommentView&gt; topicBindCommentViews=new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>127</i>&nbsp;        for (Comment comment:comments)</b>
+<b class="fc"><i>128</i>&nbsp;            topicBindCommentViews.add(new TopicBindCommentView(comment));</b>
+<b class="fc"><i>129</i>&nbsp;        return topicBindCommentViews;</b>
+<i>130</i>&nbsp;    }
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    /**
+<i>133</i>&nbsp;     * @Description: 获取用户的全部回答
+<i>134</i>&nbsp;     */
+<i>135</i>&nbsp;    @CrossOrigin
+<i>136</i>&nbsp;    @RequestMapping(&quot;/getCommentsUserCreat&quot;)
+<i>137</i>&nbsp;    List&lt;TopicBindCommentView&gt; getCommentsUserCreat(@RequestParam(&quot;userId&quot;) Integer userId){
+<b class="fc"><i>138</i>&nbsp;        List&lt;Comment&gt; comments=userService.findUserByUserId(userId).getComments();</b>
+<b class="fc"><i>139</i>&nbsp;        List&lt;TopicBindCommentView&gt; topicBindCommentViews=new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>140</i>&nbsp;        for (Comment comment:comments)</b>
+<b class="fc"><i>141</i>&nbsp;            topicBindCommentViews.add(new TopicBindCommentView(comment));</b>
+<b class="fc"><i>142</i>&nbsp;        return topicBindCommentViews;</b>
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    /**
+<i>146</i>&nbsp;     * @Description: 获取用户的全部话题
+<i>147</i>&nbsp;     */
+<i>148</i>&nbsp;    @CrossOrigin
+<i>149</i>&nbsp;    @RequestMapping(&quot;/getTopicsUserCreat&quot;)
+<i>150</i>&nbsp;    List&lt;TopicView&gt; getTopicsUserCreat(@RequestParam(&quot;userId&quot;) Integer userId){
+<b class="fc"><i>151</i>&nbsp;        List&lt;Topic&gt; topics=userService.findUserByUserId(userId).getTopics();</b>
+<b class="fc"><i>152</i>&nbsp;        List&lt;TopicView&gt; topicViews= new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>153</i>&nbsp;        for (Topic topic:topics)</b>
+<b class="fc"><i>154</i>&nbsp;            topicViews.add(new TopicView(topic));</b>
+<b class="fc"><i>155</i>&nbsp;        return topicViews;</b>
+<i>156</i>&nbsp;    }
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

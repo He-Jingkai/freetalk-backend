@@ -1,0 +1,71 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MessageDao</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.dao</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MessageDao (com.freetalk.freetalk_backend.dao)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MessageDao</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.dao;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.freetalk.freetalk_backend.entity.Message;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; *
+<i>9</i>&nbsp; * @ClassName: MessageDao
+<i>10</i>&nbsp; * @author: He Jingkai
+<i>11</i>&nbsp; * @date: 2021.7.20
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;public interface MessageDao {
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    List&lt;Message&gt; findMessagesBySendUser_UserIdInAndAcceptUser_UserIdIn(List&lt;Integer&gt; sendUserRange, List&lt;Integer&gt; receiveUserRange);
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    void save(Message message);
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    List&lt;Message&gt; findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(Integer acceptUserId,Integer sentUserId,Integer isRead);
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    List&lt;Message&gt; findMessagesByAcceptUser_UserIdAndIsRead(Integer acceptUserId,Integer isRead);
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

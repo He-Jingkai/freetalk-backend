@@ -45,7 +45,7 @@ class UserDaoImplTest {
     void saveAndFlush() {
         User user=userDao.findUserByUserId(1);
         user.setUsername("abc");
-        userDao.saveAndFlush(user);
+        userDao.saveAUser(user);
         assertThat(userDao.findUserByUserId(1).getUsername(),equalTo("abc"));
     }
 

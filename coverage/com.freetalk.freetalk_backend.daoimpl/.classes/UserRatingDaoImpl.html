@@ -1,0 +1,135 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserRatingDaoImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.daoimpl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserRatingDaoImpl (com.freetalk.freetalk_backend.daoimpl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserRatingDaoImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UserRatingDaoImpl$$EnhancerBySpringCGLIB$$a0ac486c</td>
+  </tr>
+  <tr>
+    <td class="name">UserRatingDaoImpl$$EnhancerBySpringCGLIB$$a0ac486c$$FastClassBySpringCGLIB$$fd5fc4c5</td>
+  </tr>
+  <tr>
+    <td class="name">UserRatingDaoImpl$$FastClassBySpringCGLIB$$f8c8b676</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.daoimpl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import com.freetalk.freetalk_backend.dao.UserRatingDao;
+<i>5</i>&nbsp;import com.freetalk.freetalk_backend.entity.UserRating;
+<i>6</i>&nbsp;import com.freetalk.freetalk_backend.repository.UserRatingRepository;
+<i>7</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>8</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import java.util.List;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;/**
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * @ClassName: UserRatingDaoImpl
+<i>15</i>&nbsp; * @author: Liu Yao
+<i>16</i>&nbsp; * @Description:
+<i>17</i>&nbsp; * @date: 2021.7.23
+<i>18</i>&nbsp; */
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;@Repository
+<b class="fc"><i>21</i>&nbsp;public class UserRatingDaoImpl implements UserRatingDao {</b>
+<i>22</i>&nbsp;    @Autowired
+<i>23</i>&nbsp;    private UserRatingRepository userRatingRepository;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    @Override
+<i>26</i>&nbsp;    public void deleteAll()
+<i>27</i>&nbsp;    {
+<b class="fc"><i>28</i>&nbsp;        userRatingRepository.deleteAll();</b>
+<b class="fc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @Override
+<i>32</i>&nbsp;    public void saveAllAndFlush(List&lt;UserRating&gt; userRatingList)
+<i>33</i>&nbsp;    {
+<b class="fc"><i>34</i>&nbsp;        userRatingRepository.saveAllAndFlush(userRatingList);</b>
+<b class="fc"><i>35</i>&nbsp;    }</b>
+<i>36</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.serviceimpl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserServiceImpl (com.freetalk.freetalk_backend.serviceimpl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.2%
+  </span>
+  <span class="absValue">
+    (50/ 52)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.serviceimpl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.alibaba.fastjson.JSON;
+<i>4</i>&nbsp;import com.alibaba.fastjson.JSONArray;
+<i>5</i>&nbsp;import com.alibaba.fastjson.serializer.SerializerFeature;
+<i>6</i>&nbsp;import com.freetalk.freetalk_backend.dao.BanTimeDao;
+<i>7</i>&nbsp;import com.freetalk.freetalk_backend.dao.UserDao;
+<i>8</i>&nbsp;import com.freetalk.freetalk_backend.dao.UserInfoDao;
+<i>9</i>&nbsp;import com.freetalk.freetalk_backend.entity.BanTime;
+<i>10</i>&nbsp;import com.freetalk.freetalk_backend.entity.User;
+<i>11</i>&nbsp;import com.freetalk.freetalk_backend.entity.UserInfo;
+<i>12</i>&nbsp;import com.freetalk.freetalk_backend.service.UserService;
+<i>13</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>14</i>&nbsp;import org.springframework.stereotype.Service;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;import java.nio.charset.StandardCharsets;
+<i>18</i>&nbsp;import java.sql.Timestamp;
+<i>19</i>&nbsp;import java.text.SimpleDateFormat;
+<i>20</i>&nbsp;import java.util.*;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;@Service
+<b class="fc"><i>24</i>&nbsp;public class UserServiceImpl implements UserService {</b>
+<i>25</i>&nbsp;    @Autowired
+<i>26</i>&nbsp;    UserDao userDao;
+<i>27</i>&nbsp;    @Autowired
+<i>28</i>&nbsp;    BanTimeDao banTimeDao;
+<i>29</i>&nbsp;    @Autowired
+<i>30</i>&nbsp;    private UserInfoDao userInfoDao;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Override
+<i>34</i>&nbsp;    public User findUserByUserId(Integer UserId) {
+<b class="fc"><i>35</i>&nbsp;        return userDao.findUserByUserId(UserId);</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    @Override
+<i>41</i>&nbsp;    public Integer register(Map&lt;String,Object&gt; map) {
+<b class="fc"><i>42</i>&nbsp;        String username=(String)map.get(&quot;username&quot;);</b>
+<b class="fc"><i>43</i>&nbsp;        String password=(String)map.get(&quot;password&quot;);</b>
+<b class="fc"><i>44</i>&nbsp;        String email=(String)map.get(&quot;email&quot;);</b>
+<b class="fc"><i>45</i>&nbsp;        User user=new User();</b>
+<b class="fc"><i>46</i>&nbsp;        user.setUsername(username);</b>
+<b class="fc"><i>47</i>&nbsp;        user.setPassword(password);</b>
+<b class="fc"><i>48</i>&nbsp;        user.setEmail(email);</b>
+<b class="fc"><i>49</i>&nbsp;        if(map.containsKey(&quot;avatar&quot;))</b>
+<i>50</i>&nbsp;        {
+<b class="nc"><i>51</i>&nbsp;            String avatar=(String) map.get(&quot;avatar&quot;);</b>
+<b class="nc"><i>52</i>&nbsp;            user.setImage(avatar);</b>
+<i>53</i>&nbsp;        }
+<b class="fc"><i>54</i>&nbsp;        userDao.saveAUser(user);</b>
+<b class="fc"><i>55</i>&nbsp;        return user.getUserId();</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    @Override
+<i>59</i>&nbsp;    public String login(Map&lt;String,Object&gt; map) {
+<b class="fc"><i>60</i>&nbsp;        ArrayList&lt;String&gt; arrayList = new ArrayList&lt;String&gt;();</b>
+<b class="fc"><i>61</i>&nbsp;        String userid=map.get(&quot;userid&quot;).toString();</b>
+<b class="fc"><i>62</i>&nbsp;        if(!userid.matches(&quot;^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$&quot;))return &quot;&quot;;</b>
+<b class="fc"><i>63</i>&nbsp;        String password=map.get(&quot;password&quot;).toString();</b>
+<b class="fc"><i>64</i>&nbsp;        User user= userDao.findUserByUserId(Integer.parseInt(userid));</b>
+<b class="fc"><i>65</i>&nbsp;        Boolean flag=false;</b>
+<b class="fc"><i>66</i>&nbsp;        String str=userid+&quot;和酮不让我下班&quot;;</b>
+<b class="fc"><i>67</i>&nbsp;        if(user!=null) {</b>
+<b class="fc"><i>68</i>&nbsp;            if (password.equals(user.getPassword())) {</b>
+<b class="fc"><i>69</i>&nbsp;                Timestamp currentTime = new Timestamp(System.currentTimeMillis());</b>
+<b class="fc"><i>70</i>&nbsp;                List&lt;BanTime&gt; banTimes = banTimeDao.findBanTimesByUserId(Integer.parseInt(userid));</b>
+<b class="fc"><i>71</i>&nbsp;                arrayList.add(userid);</b>
+<i>72</i>&nbsp;
+<b class="fc"><i>73</i>&nbsp;                if(!flag)arrayList.add(&quot;&quot;);</b>
+<b class="fc"><i>74</i>&nbsp;                arrayList.add(Base64.getEncoder().encodeToString(str.getBytes(StandardCharsets.UTF_8)));</b>
+<i>75</i>&nbsp;
+<b class="fc"><i>76</i>&nbsp;            } else {</b>
+<b class="fc"><i>77</i>&nbsp;                arrayList.add(&quot;&quot;);</b>
+<b class="fc"><i>78</i>&nbsp;                arrayList.add(&quot;&quot;);</b>
+<b class="fc"><i>79</i>&nbsp;                arrayList.add(&quot;&quot;);</b>
+<i>80</i>&nbsp;            }
+<i>81</i>&nbsp;        }
+<b class="fc"><i>82</i>&nbsp;        return JSON.toJSONString(arrayList, SerializerFeature.BrowserCompatible);</b>
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    @Override
+<i>86</i>&nbsp;    public void updateImage(Map&lt;String,Object&gt; map){
+<b class="fc"><i>87</i>&nbsp;        Integer userId=(Integer) map.get(&quot;userId&quot;);</b>
+<b class="fc"><i>88</i>&nbsp;        String imageBase64=(String) map.get(&quot;imageBase64&quot;);</b>
+<b class="fc"><i>89</i>&nbsp;        User user=userDao.findUserByUserId(userId);</b>
+<b class="fc"><i>90</i>&nbsp;        user.setImage(imageBase64);</b>
+<b class="fc"><i>91</i>&nbsp;        userDao.saveAUser(user);</b>
+<b class="fc"><i>92</i>&nbsp;    }</b>
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    @Override
+<i>95</i>&nbsp;    public void updateUserInfo(Map&lt;String,Object&gt; map){
+<b class="fc"><i>96</i>&nbsp;        Integer userId=(Integer)map.get(&quot;userId&quot;);</b>
+<b class="fc"><i>97</i>&nbsp;        String email=(String) map.get(&quot;email&quot;);</b>
+<b class="fc"><i>98</i>&nbsp;        String description=(String) map.get(&quot;description&quot;);</b>
+<b class="fc"><i>99</i>&nbsp;        String image=(String) map.get(&quot;image&quot;);</b>
+<b class="fc"><i>100</i>&nbsp;        String username=(String) map.get(&quot;username&quot;) ;</b>
+<i>101</i>&nbsp;
+<b class="fc"><i>102</i>&nbsp;        UserInfo userInfo=userInfoDao.findUserInfoByUserId(userId);</b>
+<b class="fc"><i>103</i>&nbsp;        userInfo.setUsername(username);</b>
+<b class="fc"><i>104</i>&nbsp;        userInfo.setEmail(email);</b>
+<b class="fc"><i>105</i>&nbsp;        userInfo.setDescription(description);</b>
+<b class="fc"><i>106</i>&nbsp;        userInfo.setImage(image);</b>
+<b class="fc"><i>107</i>&nbsp;        userInfoDao.save(userInfo);</b>
+<b class="fc"><i>108</i>&nbsp;    }</b>
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    @Override
+<i>111</i>&nbsp;    public UserInfo getUserInfo(Integer userId){
+<b class="fc"><i>112</i>&nbsp;        return userInfoDao.findUserInfoByUserId(userId);</b>
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,311 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FollowServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.serviceimpl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FollowServiceImpl (com.freetalk.freetalk_backend.serviceimpl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FollowServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (65/ 65)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.serviceimpl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.freetalk.freetalk_backend.dao.CommentDao;
+<i>4</i>&nbsp;import com.freetalk.freetalk_backend.dao.TopicDao;
+<i>5</i>&nbsp;import com.freetalk.freetalk_backend.dao.UserDao;
+<i>6</i>&nbsp;import com.freetalk.freetalk_backend.dao.UserInfoDao;
+<i>7</i>&nbsp;import com.freetalk.freetalk_backend.dto.CommentUserBind;
+<i>8</i>&nbsp;import com.freetalk.freetalk_backend.entity.Comment;
+<i>9</i>&nbsp;import com.freetalk.freetalk_backend.entity.Topic;
+<i>10</i>&nbsp;import com.freetalk.freetalk_backend.entity.User;
+<i>11</i>&nbsp;import com.freetalk.freetalk_backend.entity.UserInfo;
+<i>12</i>&nbsp;import com.freetalk.freetalk_backend.service.FollowService;
+<i>13</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>14</i>&nbsp;import org.springframework.stereotype.Service;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;import java.util.*;
+<i>17</i>&nbsp;import java.util.stream.Collectors;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;/**
+<i>20</i>&nbsp; *
+<i>21</i>&nbsp; * @ClassName: FollowService
+<i>22</i>&nbsp; * @author: He Jingkai
+<i>23</i>&nbsp; * @date: 2021.7.22
+<i>24</i>&nbsp; */
+<i>25</i>&nbsp;@Service
+<b class="fc"><i>26</i>&nbsp;public class FollowServiceImpl implements FollowService {</b>
+<i>27</i>&nbsp;    @Autowired
+<i>28</i>&nbsp;    private UserDao userDao;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @Autowired
+<i>31</i>&nbsp;    private UserInfoDao userInfoDao;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Autowired
+<i>34</i>&nbsp;    private CommentDao commentDao;
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    @Autowired
+<i>37</i>&nbsp;    private TopicDao topicDao;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    @Override
+<i>41</i>&nbsp;    public void followAUser(Integer userId,Integer userId_toFollow){
+<b class="fc"><i>42</i>&nbsp;        User user=userDao.findUserByUserId(userId);</b>
+<b class="fc"><i>43</i>&nbsp;        List&lt;UserInfo&gt; userInfos=user.getTheUsersIFollowing();</b>
+<b class="fc"><i>44</i>&nbsp;        UserInfo userInfo=userInfoDao.findUserInfoByUserId(userId_toFollow);</b>
+<b class="fc"><i>45</i>&nbsp;        if(!userInfos.contains(userInfo))</b>
+<b class="fc"><i>46</i>&nbsp;            userInfos.add(userInfo);</b>
+<b class="fc"><i>47</i>&nbsp;        user.setTheUsersIFollowing(userInfos);</b>
+<b class="fc"><i>48</i>&nbsp;        userDao.saveAUser(user);</b>
+<i>49</i>&nbsp;
+<b class="fc"><i>50</i>&nbsp;        User user_toFollow=userDao.findUserByUserId(userId_toFollow);</b>
+<b class="fc"><i>51</i>&nbsp;        List&lt;UserInfo&gt; userInfos1=user_toFollow.getAllUsersFollowingMe();</b>
+<b class="fc"><i>52</i>&nbsp;        userInfos1.add(userInfoDao.findUserInfoByUserId(userId));</b>
+<b class="fc"><i>53</i>&nbsp;        user_toFollow.setAllUsersFollowingMe(userInfos1);</b>
+<b class="fc"><i>54</i>&nbsp;    }</b>
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    @Override
+<i>57</i>&nbsp;    public void unfollowAUser(Integer userId,Integer userId_toFollow){
+<b class="fc"><i>58</i>&nbsp;        User user=userDao.findUserByUserId(userId);</b>
+<b class="fc"><i>59</i>&nbsp;        List&lt;UserInfo&gt; userInfos=user.getTheUsersIFollowing();</b>
+<b class="fc"><i>60</i>&nbsp;        UserInfo userInfo=userInfoDao.findUserInfoByUserId(userId_toFollow);</b>
+<b class="fc"><i>61</i>&nbsp;        if(userInfos.contains(userInfo))</b>
+<b class="fc"><i>62</i>&nbsp;            userInfos.removeIf(userInfo1 -&gt; userInfo1.equals(userInfo));</b>
+<b class="fc"><i>63</i>&nbsp;        user.setTheUsersIFollowing(userInfos);</b>
+<b class="fc"><i>64</i>&nbsp;        userDao.saveAUser(user);</b>
+<i>65</i>&nbsp;
+<b class="fc"><i>66</i>&nbsp;        User user_toFollow=userDao.findUserByUserId(userId_toFollow);</b>
+<b class="fc"><i>67</i>&nbsp;        List&lt;UserInfo&gt; userInfos1=user_toFollow.getAllUsersFollowingMe();</b>
+<b class="fc"><i>68</i>&nbsp;        userInfos1.remove(userInfoDao.findUserInfoByUserId(userId));</b>
+<b class="fc"><i>69</i>&nbsp;        user_toFollow.setAllUsersFollowingMe(userInfos1);</b>
+<b class="fc"><i>70</i>&nbsp;    }</b>
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    @Override
+<i>73</i>&nbsp;    public List&lt;UserInfo&gt; getAllUserFollowingMe(Integer userId){
+<b class="fc"><i>74</i>&nbsp;        return userDao.findUserByUserId(userId).getAllUsersFollowingMe();</b>
+<i>75</i>&nbsp;    }
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    @Override
+<i>78</i>&nbsp;    public List&lt;UserInfo&gt; getAllUserIFollowing(Integer userId){
+<b class="fc"><i>79</i>&nbsp;        return userDao.findUserByUserId(userId).getTheUsersIFollowing();</b>
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    @Override
+<i>84</i>&nbsp;    public boolean checkUserFollow (Integer userId, Integer userId_toFollow){
+<b class="fc"><i>85</i>&nbsp;        List&lt;UserInfo&gt; usersFollowingMe=userDao.findUserByUserId(userId_toFollow).getAllUsersFollowingMe();</b>
+<b class="fc"><i>86</i>&nbsp;        UserInfo userInfo=userInfoDao.findUserInfoByUserId(userId);</b>
+<b class="fc"><i>87</i>&nbsp;        return usersFollowingMe.contains(userInfo);</b>
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;    /**
+<i>90</i>&nbsp;     * @Description: ordered by time
+<i>91</i>&nbsp;     */
+<i>92</i>&nbsp;    @Override
+<i>93</i>&nbsp;    public List&lt;Topic&gt; getTopicOfFollowingUsers(Integer userId){
+<b class="fc"><i>94</i>&nbsp;        List&lt;Topic&gt; topics=new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>95</i>&nbsp;        List&lt;UserInfo&gt; userInfos=userDao.findUserByUserId(userId).getTheUsersIFollowing();</b>
+<b class="fc"><i>96</i>&nbsp;        for(UserInfo userInfo:userInfos)</b>
+<b class="fc"><i>97</i>&nbsp;            topics.addAll(userDao.findUserByUserId(userInfo.getUserId()).getTopics());</b>
+<b class="fc"><i>98</i>&nbsp;        return topics.stream().distinct().sorted().collect(Collectors.toList());</b>
+<i>99</i>&nbsp;    }
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    /**
+<i>102</i>&nbsp;     * @Description: ordered by time
+<i>103</i>&nbsp;     */
+<i>104</i>&nbsp;    @Override
+<i>105</i>&nbsp;    public List&lt;Comment&gt; getCommentsOfFollowingUsers(Integer userId){
+<b class="fc"><i>106</i>&nbsp;        List&lt;Comment&gt; comments=new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>107</i>&nbsp;        List&lt;UserInfo&gt; userInfos=userDao.findUserByUserId(userId).getTheUsersIFollowing();</b>
+<b class="fc"><i>108</i>&nbsp;        for(UserInfo userInfo:userInfos)</b>
+<b class="fc"><i>109</i>&nbsp;            comments.addAll(userDao.findUserByUserId(userInfo.getUserId()).getComments());</b>
+<b class="fc"><i>110</i>&nbsp;        return comments.stream().distinct().sorted().collect(Collectors.toList());</b>
+<i>111</i>&nbsp;    }
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    /**
+<i>115</i>&nbsp;     * @Description: ordered by time
+<i>116</i>&nbsp;     */
+<i>117</i>&nbsp;    @Override
+<i>118</i>&nbsp;    public List&lt;CommentUserBind&gt; getUserAnswerMyCommentAndTopic(Integer userId){
+<b class="fc"><i>119</i>&nbsp;        List&lt;CommentUserBind&gt; commentUserBinds=new ArrayList&lt;&gt;();</b>
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;        /**
+<i>122</i>&nbsp;         * 获取回复过用户回复的人及其回复
+<i>123</i>&nbsp;         */
+<b class="fc"><i>124</i>&nbsp;        List&lt;Comment&gt; comments1=userDao.findUserByUserId(userId).getComments();</b>
+<b class="fc"><i>125</i>&nbsp;        for(Comment comment:comments1){</b>
+<b class="fc"><i>126</i>&nbsp;            List&lt;Comment&gt; comments=commentDao.findCommentsByReply_id(comment.getCommentId());</b>
+<i>127</i>&nbsp;//            for(Comment comment1:comments){
+<i>128</i>&nbsp;//                CommentUserBind commentUserBind=new CommentUserBind();
+<i>129</i>&nbsp;//                commentUserBind.setType(&quot;xxx reply my answer&quot;);
+<i>130</i>&nbsp;//                commentUserBind.setComment(comment1);
+<i>131</i>&nbsp;//                commentUserBind.setCommentBeReplied(comment);
+<i>132</i>&nbsp;//                commentUserBind.setTimestamp(comment1.getSendTime());
+<i>133</i>&nbsp;//                commentUserBinds.add(commentUserBind);
+<i>134</i>&nbsp;//            }
+<b class="fc"><i>135</i>&nbsp;        }</b>
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;        /**
+<i>138</i>&nbsp;         * 获取回复过用户话题的人及其回复
+<i>139</i>&nbsp;         */
+<b class="fc"><i>140</i>&nbsp;        List&lt;Topic&gt; topics=userDao.findUserByUserId(userId).getTopics();</b>
+<b class="fc"><i>141</i>&nbsp;        for(Topic topic:topics){</b>
+<b class="fc"><i>142</i>&nbsp;            List&lt;Comment&gt; comments=topic.getComments();</b>
+<b class="fc"><i>143</i>&nbsp;            for(Comment comment:comments){</b>
+<i>144</i>&nbsp;//                boolean flag=false;
+<i>145</i>&nbsp;//                for (CommentUserBind commentUserBind:commentUserBinds)
+<i>146</i>&nbsp;//                    if(comment.getCommentId().equals(commentUserBind.getComment().getCommentId())){
+<i>147</i>&nbsp;//                        flag=true;
+<i>148</i>&nbsp;//                        break;
+<i>149</i>&nbsp;//                    }
+<i>150</i>&nbsp;//                if (flag)
+<i>151</i>&nbsp;//                    continue;
+<b class="fc"><i>152</i>&nbsp;                CommentUserBind commentUserBind=new CommentUserBind();</b>
+<b class="fc"><i>153</i>&nbsp;                commentUserBind.setType(&quot;xxx answer my topic&quot;);</b>
+<b class="fc"><i>154</i>&nbsp;                commentUserBind.setComment(comment);</b>
+<b class="fc"><i>155</i>&nbsp;                commentUserBind.setCommentBeReplied(null);</b>
+<b class="fc"><i>156</i>&nbsp;                commentUserBind.setTimestamp(comment.getSendTime());</b>
+<b class="fc"><i>157</i>&nbsp;                commentUserBinds.add(commentUserBind);</b>
+<b class="fc"><i>158</i>&nbsp;            }</b>
+<b class="fc"><i>159</i>&nbsp;        }</b>
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;        /**
+<i>162</i>&nbsp;         * 删除自己的回复
+<i>163</i>&nbsp;         */
+<b class="fc"><i>164</i>&nbsp;        commentUserBinds.removeIf(</b>
+<b class="fc"><i>165</i>&nbsp;                commentUserBind -&gt; commentUserBind.getComment().getUser().equals(</b>
+<b class="fc"><i>166</i>&nbsp;                        userInfoDao.findUserInfoByUserId(userId)</b>
+<i>167</i>&nbsp;                )
+<i>168</i>&nbsp;        );
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;        /**
+<i>171</i>&nbsp;         * 按照时间排序
+<i>172</i>&nbsp;         */
+<b class="fc"><i>173</i>&nbsp;        return commentUserBinds.stream().distinct().sorted().collect(Collectors.toList());</b>
+<i>174</i>&nbsp;    }
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;    /**
+<i>177</i>&nbsp;     * @Description: ordered by time
+<i>178</i>&nbsp;     */
+<i>179</i>&nbsp;    @Override
+<i>180</i>&nbsp;    public List&lt;UserInfo&gt; getUserLikeAComment(Integer commentId){
+<b class="fc"><i>181</i>&nbsp;        return commentDao.findCommentByCommentId(commentId).getUserLikeTheComment();</b>
+<i>182</i>&nbsp;    }
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;    /**
+<i>185</i>&nbsp;     * @Description: ordered by time
+<i>186</i>&nbsp;     */
+<i>187</i>&nbsp;    @Override
+<i>188</i>&nbsp;    public List&lt;UserInfo&gt; getUserStarAComment(Integer commentId){
+<b class="fc"><i>189</i>&nbsp;        return commentDao.findCommentByCommentId(commentId).getUserStarTheComment();</b>
+<i>190</i>&nbsp;    }
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;    /**
+<i>193</i>&nbsp;     * @Description: ordered by time
+<i>194</i>&nbsp;     */
+<i>195</i>&nbsp;    @Override
+<i>196</i>&nbsp;    public List&lt;UserInfo&gt; getUserLikeATopic(Integer topicId){
+<b class="fc"><i>197</i>&nbsp;        return topicDao.findTopicByTopicId(topicId).getUserLikeTheTopic();</b>
+<i>198</i>&nbsp;    }
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;    /**
+<i>201</i>&nbsp;     * @Description: ordered by time
+<i>202</i>&nbsp;     */
+<i>203</i>&nbsp;    @Override
+<i>204</i>&nbsp;    public List&lt;UserInfo&gt; getUserStarATopic(Integer topicId){
+<b class="fc"><i>205</i>&nbsp;        return topicDao.findTopicByTopicId(topicId).getUserStarTheTopic();</b>
+<i>206</i>&nbsp;    }
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;//    @Override
+<i>209</i>&nbsp;//    public List&lt;TopicFocusView&gt; getTopicOfFocusedUsers(Integer userId){
+<i>210</i>&nbsp;//        List&lt;TopicFocusView&gt; topicFocusViews=new ArrayList&lt;&gt;();
+<i>211</i>&nbsp;//        User user=userDao.findUserByUserId(userId);
+<i>212</i>&nbsp;//        List&lt;UserInfo&gt; userInfos=user.getTheUsersIFollowing();
+<i>213</i>&nbsp;//        for(UserInfo userInfo:userInfos){
+<i>214</i>&nbsp;//            List&lt;Topic&gt; topics=userDao.findUserByUserId(userInfo.getUserId()).getTopics();
+<i>215</i>&nbsp;//            for(Topic topic:topics)
+<i>216</i>&nbsp;//                topicFocusViews.add(new TopicFocusView(topic,userInfo));
+<i>217</i>&nbsp;//            List&lt;Comment&gt; comments=userDao.findUserByUserId(userInfo.getUserId()).getComments();
+<i>218</i>&nbsp;//            for(Comment comment:comments)
+<i>219</i>&nbsp;//                topicFocusViews.add(new TopicFocusView(comment,userInfo));
+<i>220</i>&nbsp;//        }
+<i>221</i>&nbsp;//        Set&lt;TopicFocusView&gt; set = new TreeSet&lt;&gt;(Comparator.comparing(TopicFocusView::getTopicId));
+<i>222</i>&nbsp;//        set.addAll(topicFocusViews);
+<i>223</i>&nbsp;//        List&lt;TopicFocusView&gt; topicFocusViewsList=new ArrayList&lt;&gt;(set);
+<i>224</i>&nbsp;//        topicFocusViewsList.sort(Comparator.comparing(TopicFocusView::getTime));
+<i>225</i>&nbsp;//        return topicFocusViewsList;
+<i>226</i>&nbsp;//    }
+<i>227</i>&nbsp;//
+<i>228</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

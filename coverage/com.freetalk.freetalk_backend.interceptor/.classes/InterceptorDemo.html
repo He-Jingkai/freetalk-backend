@@ -1,0 +1,108 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: InterceptorDemo</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.interceptor</a> ]
+</div>
+
+<h1>Coverage Summary for Class: InterceptorDemo (com.freetalk.freetalk_backend.interceptor)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InterceptorDemo</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/ 8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.interceptor;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.springframework.stereotype.Component;
+<i>4</i>&nbsp;import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import javax.servlet.http.HttpServletRequest;
+<i>7</i>&nbsp;import javax.servlet.http.HttpServletResponse;
+<i>8</i>&nbsp;import java.nio.charset.StandardCharsets;
+<i>9</i>&nbsp;import java.util.Base64;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;@Component
+<b class="fc"><i>12</i>&nbsp;public class InterceptorDemo extends HandlerInterceptorAdapter {</b>
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    @Override
+<i>16</i>&nbsp;    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+<b class="fc"><i>17</i>&nbsp;        System.out.println(&quot;前置拦截器1 preHandle： &quot;);</b>
+<b class="fc"><i>18</i>&nbsp;        String token = httpServletRequest.getHeader(&quot;token&quot;);</b>
+<b class="fc"><i>19</i>&nbsp;        String userId=httpServletRequest.getHeader(&quot;userId&quot;);</b>
+<b class="fc"><i>20</i>&nbsp;        String decoderStr = new String(Base64.getDecoder().decode(token), StandardCharsets.UTF_8);</b>
+<b class="fc"><i>21</i>&nbsp;        if(!decoderStr.equals(userId+&quot;和酮不让我下班&quot;))return false;</b>
+<b class="fc"><i>22</i>&nbsp;        System.out.println(decoderStr);</b>
+<b class="fc"><i>23</i>&nbsp;        return true;</b>
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

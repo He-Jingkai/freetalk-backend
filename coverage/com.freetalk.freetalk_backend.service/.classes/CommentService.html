@@ -1,0 +1,104 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CommentService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CommentService (com.freetalk.freetalk_backend.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">CommentService$MockitoMock$981562086</td>
+  </tr>
+  <tr>
+    <td class="name">CommentService$MockitoMock$981562086$auxiliary$n7X6phu7</td>
+  </tr>
+  <tr>
+    <td class="name">CommentService$MockitoMock$981562086$auxiliary$XcJUFb23</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.freetalk.freetalk_backend.entity.Comment;
+<i>4</i>&nbsp;import org.springframework.data.domain.Page;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;import java.util.Map;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/**
+<i>10</i>&nbsp; *
+<i>11</i>&nbsp; * @ClassName: CommentDao
+<i>12</i>&nbsp; * @author: He Jingkai
+<i>13</i>&nbsp; * @Description: 删除回答选项：
+<i>14</i>&nbsp; * type1:用户自行删除
+<i>15</i>&nbsp; * type2:法律法规或论坛规定, 经管理员审核删除
+<i>16</i>&nbsp; * @date: 2021.7.19
+<i>17</i>&nbsp; */
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;public interface CommentService {
+<i>20</i>&nbsp;    Comment findCommentByCommentId(Integer commentId);
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    void saveAComment(Comment comment);
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    void likeAComment(String userId,String commentId);
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    void starAComment(String userId,String commentId);
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    void unlikeAComment(String userId,String commentId);
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    void unstarAComment(String userId,String commentId);
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    String checkLikeAComment(String userId,String commentId);
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    String checkStarAComment(String userId,String commentId);
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    void addAComment(Map&lt;String,Object&gt; map);
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    List&lt;Comment&gt; findCommentsByTopic(String topicId);
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    List&lt;Comment&gt; findCommentsByReply_id(Integer replyId);
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    void changeAComment(Map&lt;String,Object&gt; map);
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    void deleteAComment(Integer commentId, Integer type);
+<i>48</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TopicBindCommentView</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.dto</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TopicBindCommentView (com.freetalk.freetalk_backend.dto)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TopicBindCommentView</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96%
+  </span>
+  <span class="absValue">
+    (24/ 25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.dto;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.freetalk.freetalk_backend.entity.Comment;
+<i>4</i>&nbsp;import lombok.Data;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.sql.Timestamp;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;
+<b class="nc"><i>9</i>&nbsp;@Data</b>
+<i>10</i>&nbsp;public class TopicBindCommentView {
+<b class="fc"><i>11</i>&nbsp;    private String topicTitle;</b>
+<b class="fc"><i>12</i>&nbsp;    private Integer topicId;</b>
+<b class="fc"><i>13</i>&nbsp;    private String commentContent;</b>
+<b class="fc"><i>14</i>&nbsp;    private Integer commentId;</b>
+<i>15</i>&nbsp;
+<b class="fc"><i>16</i>&nbsp;    private Integer likes;</b>
+<b class="fc"><i>17</i>&nbsp;    private Integer stars;</b>
+<b class="fc"><i>18</i>&nbsp;    private Integer replyNumber;</b>
+<b class="fc"><i>19</i>&nbsp;    private Timestamp sendTime;</b>
+<i>20</i>&nbsp;
+<b class="fc"><i>21</i>&nbsp;    private Integer userId;</b>
+<b class="fc"><i>22</i>&nbsp;    private String username;</b>
+<b class="fc"><i>23</i>&nbsp;    private String image;</b>
+<i>24</i>&nbsp;
+<b class="fc"><i>25</i>&nbsp;    public TopicBindCommentView(Comment comment){</b>
+<b class="fc"><i>26</i>&nbsp;        topicTitle=comment.getTopic().getTitle();</b>
+<b class="fc"><i>27</i>&nbsp;        topicId=comment.getTopic().getTopicId();</b>
+<b class="fc"><i>28</i>&nbsp;        commentContent=comment.getCommentContent();</b>
+<b class="fc"><i>29</i>&nbsp;        commentId=comment.getCommentId();</b>
+<b class="fc"><i>30</i>&nbsp;        likes=comment.getLikes();</b>
+<b class="fc"><i>31</i>&nbsp;        stars=comment.getStars();</b>
+<b class="fc"><i>32</i>&nbsp;        replyNumber=comment.getReplyNumber();</b>
+<b class="fc"><i>33</i>&nbsp;        sendTime=comment.getSendTime();</b>
+<i>34</i>&nbsp;
+<b class="fc"><i>35</i>&nbsp;        username=comment.getUser().getUsername();</b>
+<b class="fc"><i>36</i>&nbsp;        userId=comment.getUser().getUserId();</b>
+<b class="fc"><i>37</i>&nbsp;        image=comment.getUser().getImage();</b>
+<b class="fc"><i>38</i>&nbsp;    }</b>
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

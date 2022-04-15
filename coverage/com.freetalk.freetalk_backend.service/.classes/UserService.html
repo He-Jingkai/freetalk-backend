@@ -1,0 +1,79 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserService (com.freetalk.freetalk_backend.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">UserService$MockitoMock$360370092</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$MockitoMock$360370092$auxiliary$JEUIJmx7</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$MockitoMock$360370092$auxiliary$MSUx2usx</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.freetalk.freetalk_backend.entity.User;
+<i>4</i>&nbsp;import com.freetalk.freetalk_backend.entity.UserInfo;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;import java.util.Map;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;public interface UserService {
+<i>11</i>&nbsp;    User findUserByUserId(Integer UserId);
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    Integer register(Map&lt;String,Object&gt; map);
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    String login(Map&lt;String,Object&gt; map);
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    void updateImage(Map&lt;String,Object&gt; map);
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    void updateUserInfo(Map&lt;String,Object&gt; map);
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    UserInfo getUserInfo(Integer userId);
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

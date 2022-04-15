@@ -1,0 +1,81 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TopicDao</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.dao</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TopicDao (com.freetalk.freetalk_backend.dao)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">TopicDao</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.dao;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.freetalk.freetalk_backend.entity.Topic;
+<i>4</i>&nbsp;import com.freetalk.freetalk_backend.entity.TopicInfo;
+<i>5</i>&nbsp;import org.springframework.data.domain.Page;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public interface TopicDao {
+<i>10</i>&nbsp;    List&lt;Topic&gt; getTopics();
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    Topic findTopicByTopicId (Integer topicId);
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    Page&lt;Topic&gt; getTopicsByPage(Integer pageNum, Integer pageSize);
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    Topic saveATopic (Topic topic);
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    TopicInfo saveATopicInfo (TopicInfo topicInfo);
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    /**
+<i>21</i>&nbsp;     *
+<i>22</i>&nbsp;     * @FunctionName: getTopicsByPageSortedByHot
+<i>23</i>&nbsp;     * @Description: 按照热度分页获取话题
+<i>24</i>&nbsp;     * @author: He Jingkai
+<i>25</i>&nbsp;     * @date: 2021.7.21
+<i>26</i>&nbsp;     */
+<i>27</i>&nbsp;    List&lt;Topic&gt; getTopicsByPageSortedByHot(Integer pageNum, Integer pageSize);
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    Long getTopicNum();
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    Boolean checkTopicByTopicId(Integer topicId);
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

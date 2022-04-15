@@ -1,0 +1,120 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FollowService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FollowService (com.freetalk.freetalk_backend.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">FollowService$MockitoMock$885652129</td>
+  </tr>
+  <tr>
+    <td class="name">FollowService$MockitoMock$885652129$auxiliary$5VBERWXe</td>
+  </tr>
+  <tr>
+    <td class="name">FollowService$MockitoMock$885652129$auxiliary$ylui7oUG</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.freetalk.freetalk_backend.entity.Comment;
+<i>4</i>&nbsp;import com.freetalk.freetalk_backend.entity.Topic;
+<i>5</i>&nbsp;import com.freetalk.freetalk_backend.entity.UserInfo;
+<i>6</i>&nbsp;import com.freetalk.freetalk_backend.dto.CommentUserBind;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; *
+<i>12</i>&nbsp; * @ClassName: FollowService
+<i>13</i>&nbsp; * @author: He Jingkai
+<i>14</i>&nbsp; * @date: 2021.7.22
+<i>15</i>&nbsp; */
+<i>16</i>&nbsp;public interface FollowService {
+<i>17</i>&nbsp;    void followAUser(Integer userId,Integer userId_toFollow);
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    void unfollowAUser(Integer userId,Integer userId_toFollow);
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    List&lt;UserInfo&gt; getAllUserFollowingMe(Integer userId);
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    List&lt;UserInfo&gt; getAllUserIFollowing(Integer userId);
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    boolean checkUserFollow (Integer userId, Integer userId_toFollow);
+<i>26</i>&nbsp;    /**
+<i>27</i>&nbsp;     * @Description: ordered by time
+<i>28</i>&nbsp;     */
+<i>29</i>&nbsp;    List&lt;Topic&gt; getTopicOfFollowingUsers(Integer userId);
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    /**
+<i>32</i>&nbsp;     * @Description: ordered by time
+<i>33</i>&nbsp;     */
+<i>34</i>&nbsp;    List&lt;Comment&gt; getCommentsOfFollowingUsers(Integer userId);
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * @Description: ordered by time
+<i>39</i>&nbsp;     */
+<i>40</i>&nbsp;    List&lt;CommentUserBind&gt; getUserAnswerMyCommentAndTopic(Integer userId);
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    /**
+<i>43</i>&nbsp;     * @Description: ordered by time
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    List&lt;UserInfo&gt; getUserLikeAComment(Integer commentId);
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    /**
+<i>48</i>&nbsp;     * @Description: ordered by time
+<i>49</i>&nbsp;     */
+<i>50</i>&nbsp;    List&lt;UserInfo&gt; getUserStarAComment(Integer commentId);
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    /**
+<i>53</i>&nbsp;     * @Description: ordered by time
+<i>54</i>&nbsp;     */
+<i>55</i>&nbsp;    List&lt;UserInfo&gt; getUserLikeATopic(Integer topicId);
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    /**
+<i>58</i>&nbsp;     * @Description: ordered by time
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    List&lt;UserInfo&gt; getUserStarATopic(Integer topicId);
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

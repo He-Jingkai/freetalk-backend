@@ -34,50 +34,27 @@ class UserServiceImplTest {
 
     @Test
     void register() {
-        Map<String,Object> map1=new HashMap<>();
-        map1.put("username", "hjk");
-        map1.put("password","123456");
-        map1.put("email","Hjk@sjtu.edu.cn");
-        Map<String,Object> map2=new HashMap<>();
-        map2.put("username", "gy");
-        map2.put("password","123456");
-        map2.put("email","Gy@sjtu.edu.cn");
-        map2.put("avatar","https://i2.hdslb.com/bfs/face/cff4d577dbebb1e178a48eeb8de0218c01a4ff65.jpg@240w_240h_1c_1s.webp");
-        assertThat(userService.findUserByUserId(userService.register(map1)).getUsername(),equalTo("hjk"));
-        assertThat(userService.findUserByUserId(userService.register(map1)).getPassword(),equalTo("123456"));
-        assertThat(userService.findUserByUserId(userService.register(map1)).getEmail(),equalTo("Hjk@sjtu.edu.cn"));
-        assertThat(userService.findUserByUserId(userService.register(map2)).getUsername(),equalTo("gy"));
-        assertThat(userService.findUserByUserId(userService.register(map2)).getPassword(),equalTo("123456"));
-        assertThat(userService.findUserByUserId(userService.register(map2)).getEmail(),equalTo("Gy@sjtu.edu.cn"));
-        assertThat(userService.findUserByUserId(userService.register(map2)).getImage(),equalTo("https://i2.hdslb.com/bfs/face/cff4d577dbebb1e178a48eeb8de0218c01a4ff65.jpg@240w_240h_1c_1s.webp"));
+        Map<String,Object> map=new HashMap<>();
+        map.put("username", "qyc");
+        map.put("password","123");
+        map.put("email","qyc@sjtu.edu.cn");
+        assertThat(userService.findUserByUserId(userService.register(map)).getUsername(),equalTo("qyc"));
     }
 
     @Test
     void login() {
+        Map<String,Object> map1=new HashMap<>();
+        map1.put("userid", "2");
+        map1.put("password","123");
         Map<String,Object> map2=new HashMap<>();
-        map2.put("userid", "1");
-        map2.put("password","123456");
+        map2.put("userid", "2");
+        map2.put("password","12");
         Map<String,Object> map3=new HashMap<>();
-        map3.put("userid", "2");
+        map3.put("userid", "3");
         map3.put("password","123");
-        Map<String,Object> map4=new HashMap<>();
-        map4.put("userid", "3");
-        map4.put("password","123");
-        Map<String,Object> map5=new HashMap<>();
-        map5.put("userid", "4");
-        map5.put("password","123456");
-        Map<String,Object> map6=new HashMap<>();
-        map6.put("userid", "5");
-        map6.put("password","123");
-        Map<String,Object> map7=new HashMap<>();
-        map7.put("userid", "6");
-        map7.put("password","123456");
+        assertThat(userService.login(map1),equalTo("[\"2\",\"\",\"MuWSjOmFruS4jeiuqeaIkeS4i+ePrQ==\"]"));
         assertThat(userService.login(map2),equalTo("[\"\",\"\",\"\"]"));
-        assertThat(userService.login(map3),equalTo("[\"2\",\"\",\"MuWSjOmFruS4jeiuqeaIkeS4i+ePrQ==\"]"));
-        assertThat(userService.login(map4),equalTo("[\"3\",\"\",\"M+WSjOmFruS4jeiuqeaIkeS4i+ePrQ==\"]"));
-        assertThat(userService.login(map5),equalTo("[\"\",\"\",\"\"]"));
-        assertThat(userService.login(map6),equalTo("[\"5\",\"\",\"NeWSjOmFruS4jeiuqeaIkeS4i+ePrQ==\"]"));
-        assertThat(userService.login(map7),equalTo("[\"\",\"\",\"\"]"));
+        assertThat(userService.login(map3),equalTo("[\"3\",\"2021-08-11 11:23:37\",\"M+WSjOmFruS4jeiuqeaIkeS4i+ePrQ==\"]"));
     }
 
     @Test

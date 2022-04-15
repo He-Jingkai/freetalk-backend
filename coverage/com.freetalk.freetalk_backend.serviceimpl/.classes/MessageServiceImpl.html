@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MessageServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.serviceimpl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MessageServiceImpl (com.freetalk.freetalk_backend.serviceimpl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MessageServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/ 26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.serviceimpl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.freetalk.freetalk_backend.dao.MessageDao;
+<i>4</i>&nbsp;import com.freetalk.freetalk_backend.dao.UserInfoDao;
+<i>5</i>&nbsp;import com.freetalk.freetalk_backend.dto.MessageView;
+<i>6</i>&nbsp;import com.freetalk.freetalk_backend.entity.Message;
+<i>7</i>&nbsp;import com.freetalk.freetalk_backend.entity.UserInfo;
+<i>8</i>&nbsp;import com.freetalk.freetalk_backend.service.MessageService;
+<i>9</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>10</i>&nbsp;import org.springframework.stereotype.Service;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import java.sql.Timestamp;
+<i>13</i>&nbsp;import java.util.ArrayList;
+<i>14</i>&nbsp;import java.util.Iterator;
+<i>15</i>&nbsp;import java.util.List;
+<i>16</i>&nbsp;import java.util.Map;
+<i>17</i>&nbsp;import java.util.stream.Collectors;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;/**
+<i>20</i>&nbsp; *
+<i>21</i>&nbsp; * @ClassName: MessageServiceImpl
+<i>22</i>&nbsp; * @author: He Jingkai
+<i>23</i>&nbsp; * @date: 2021.7.20
+<i>24</i>&nbsp; */
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;@Service
+<b class="fc"><i>27</i>&nbsp;public class MessageServiceImpl implements MessageService {</b>
+<i>28</i>&nbsp;    @Autowired
+<i>29</i>&nbsp;    private MessageDao messageDao;
+<i>30</i>&nbsp;    @Autowired
+<i>31</i>&nbsp;    private UserInfoDao userInfoDao;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Override
+<i>34</i>&nbsp;    public List&lt;Message&gt; findMessagesBySendUser_UserIdAndAcceptUser_UserId(List&lt;Integer&gt; sendUserRange, List&lt;Integer&gt; receiveUserRange) {
+<b class="fc"><i>35</i>&nbsp;        return messageDao.findMessagesBySendUser_UserIdInAndAcceptUser_UserIdIn(sendUserRange,receiveUserRange);</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    @Override
+<i>39</i>&nbsp;    public List&lt;MessageView&gt; findMessagesBySendUser_UserIdInAndAcceptUser_UserIdIn(List&lt;Integer&gt; sendUserRange, List&lt;Integer&gt; receiveUserRange){
+<b class="fc"><i>40</i>&nbsp;        List&lt;Message&gt; messages=messageDao.findMessagesBySendUser_UserIdInAndAcceptUser_UserIdIn(sendUserRange,receiveUserRange).stream().distinct().sorted().collect(Collectors.toList());</b>
+<b class="fc"><i>41</i>&nbsp;        Iterator&lt;Message&gt; it=messages.iterator();</b>
+<b class="fc"><i>42</i>&nbsp;        List&lt;MessageView&gt; simpleMessage = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>43</i>&nbsp;        while (it.hasNext()){</b>
+<b class="fc"><i>44</i>&nbsp;            Message message= it.next();</b>
+<b class="fc"><i>45</i>&nbsp;            simpleMessage.add(new MessageView(message));</b>
+<b class="fc"><i>46</i>&nbsp;        }</b>
+<b class="fc"><i>47</i>&nbsp;        return simpleMessage;</b>
+<i>48</i>&nbsp;    }
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    @Override
+<i>51</i>&nbsp;    public List&lt;Message&gt; findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(Integer sendUserRange, Integer receiveUserRange, Integer isRead) {
+<b class="fc"><i>52</i>&nbsp;        return messageDao.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(sendUserRange,receiveUserRange,isRead);</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    @Override
+<i>56</i>&nbsp;    public void postAMessage(Map&lt;String,Object&gt; map) {
+<b class="fc"><i>57</i>&nbsp;        Integer sendUserId=(Integer) map.get(&quot;sendUserId&quot;);</b>
+<b class="fc"><i>58</i>&nbsp;        Integer receiveUserId=(Integer) map.get(&quot;receiveUserId&quot;);</b>
+<b class="fc"><i>59</i>&nbsp;        String content=(String) map.get(&quot;messageContent&quot;);</b>
+<b class="fc"><i>60</i>&nbsp;        Message message=new Message();</b>
+<b class="fc"><i>61</i>&nbsp;        message.setMessageText(content);</b>
+<b class="fc"><i>62</i>&nbsp;        message.setAcceptUser(userInfoDao.findUserInfoByUserId(receiveUserId));</b>
+<b class="fc"><i>63</i>&nbsp;        message.setSendUser(userInfoDao.findUserInfoByUserId(sendUserId));</b>
+<b class="fc"><i>64</i>&nbsp;        message.setIsRead(0);</b>
+<b class="fc"><i>65</i>&nbsp;        message.setSendTime(new Timestamp(System.currentTimeMillis()));</b>
+<b class="fc"><i>66</i>&nbsp;        messageDao.save(message);</b>
+<b class="fc"><i>67</i>&nbsp;    }</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @Override
+<i>70</i>&nbsp;    public void setAllMessageWithAUserHaveRead(String acceptUserId,String receiveUserId){
+<b class="fc"><i>71</i>&nbsp;        List&lt;Message&gt; messages=messageDao.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(Integer.valueOf(acceptUserId),Integer.valueOf(receiveUserId),0);</b>
+<i>72</i>&nbsp;//        for (Message message:messages){
+<i>73</i>&nbsp;//            message.setIsRead(1);
+<i>74</i>&nbsp;//            messageDao.save(message);
+<i>75</i>&nbsp;//        }
+<b class="fc"><i>76</i>&nbsp;    }</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    @Override
+<i>79</i>&nbsp;    public Integer numberOfMessagesUnread(String acceptUserId){
+<b class="fc"><i>80</i>&nbsp;        return messageDao.findMessagesByAcceptUser_UserIdAndIsRead(Integer.valueOf(acceptUserId),0).size();</b>
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    @Override
+<i>84</i>&nbsp;    public Integer numberOfMessagesUnreadWithAUser(String acceptUserId, String sentUserId){
+<b class="fc"><i>85</i>&nbsp;        return messageDao.findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(Integer.valueOf(acceptUserId),Integer.valueOf(sentUserId),0).size();</b>
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>

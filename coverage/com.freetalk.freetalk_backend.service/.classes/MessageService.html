@@ -1,0 +1,86 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MessageService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.freetalk.freetalk_backend.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MessageService (com.freetalk.freetalk_backend.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">MessageService$MockitoMock$657139706</td>
+  </tr>
+  <tr>
+    <td class="name">MessageService$MockitoMock$657139706$auxiliary$6bGCPPIm</td>
+  </tr>
+  <tr>
+    <td class="name">MessageService$MockitoMock$657139706$auxiliary$wjFWiDXw</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.freetalk.freetalk_backend.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.freetalk.freetalk_backend.dto.MessageView;
+<i>4</i>&nbsp;import com.freetalk.freetalk_backend.entity.Message;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;import java.util.Map;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/**
+<i>10</i>&nbsp; *
+<i>11</i>&nbsp; * @ClassName: MessageService
+<i>12</i>&nbsp; * @author: He Jingkai
+<i>13</i>&nbsp; * @date: 2021.7.20
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;public interface MessageService {
+<i>17</i>&nbsp;    List&lt;Message&gt; findMessagesBySendUser_UserIdAndAcceptUser_UserId(List&lt;Integer&gt; sendUserRange, List&lt;Integer&gt; receiveUserRange);
+<i>18</i>&nbsp;    List&lt;MessageView&gt; findMessagesBySendUser_UserIdInAndAcceptUser_UserIdIn(List&lt;Integer&gt; sendUserRange, List&lt;Integer&gt; receiveUserRange);
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    List&lt;Message&gt; findMessagesByAcceptUser_UserIdAndSendUser_UserIdAndIsRead(Integer sendUserRange, Integer receiveUserRange,Integer isRead);
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    void postAMessage(Map&lt;String,Object&gt; map);
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    void setAllMessageWithAUserHaveRead(String acceptUserId,String receiveUserId);
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    Integer numberOfMessagesUnread(String acceptUserId);
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    Integer numberOfMessagesUnreadWithAUser(String acceptUserId, String sentUserId);
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-13 22:10</div>
+</div>
+</body>
+</html>
